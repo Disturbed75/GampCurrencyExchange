@@ -37,7 +37,7 @@ public class AnalyticsService {
             headers.set("Content-Type", "application/json");
             final HttpEntity<Map<String, Object>> entity = new HttpEntity(request, headers);
             ResponseEntity<String> response = restTemplate.postForEntity(analyticsUrl, entity, String.class);
-            if (!response.getStatusCode().equals(HttpStatus.NO_CONTENT)) {
+            if (!response.getStatusCode().equals(HttpStatus.NO_CONTENT) && !(response.getStatusCode().equals(HttpStatus.OK))) {
                 throw new RestClientException("Send analytics event error. Wrong response status");
             }
         } catch (RestClientException e) {
